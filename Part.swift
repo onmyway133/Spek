@@ -12,13 +12,19 @@ public struct PartBuilder {
     }
 }
 
-public protocol Part {}
+public protocol Part {
+    func run() throws
+}
 
 public struct BeforeAll: Part {
     let closure: () -> Void
 
     public init(closure: @escaping () -> Void) {
         self.closure = closure
+    }
+
+    public func run() throws {
+
     }
 }
 
@@ -28,6 +34,10 @@ public struct AfterAll: Part {
     public init(closure: @escaping () -> Void) {
         self.closure = closure
     }
+
+    public func run() throws {
+
+    }
 }
 
 public struct BeforeEach: Part {
@@ -36,6 +46,10 @@ public struct BeforeEach: Part {
     public init(closure: @escaping () -> Void) {
         self.closure = closure
     }
+
+    public func run() throws {
+
+    }
 }
 
 public struct AfterEach: Part {
@@ -43,6 +57,10 @@ public struct AfterEach: Part {
 
     public init(closure: @escaping () -> Void) {
         self.closure = closure
+    }
+
+    public func run() throws {
+
     }
 }
 
@@ -59,6 +77,10 @@ public struct Describe: Part {
         self.name = name
         self.parts = [builder()]
     }
+
+    public func run() throws {
+
+    }
 }
 
 public struct It: Part {
@@ -68,5 +90,9 @@ public struct It: Part {
     public init(name: String, closure: @escaping () -> Void) {
         self.name = name
         self.closure = closure
+    }
+
+    public func run() throws {
+
     }
 }

@@ -6,3 +6,15 @@
 //
 
 import Foundation
+
+public func spec(@PartBuilder builder: () -> [Part]) {
+    run(parts: builder())
+}
+
+public func spec(@PartBuilder builder: () -> Part) {
+    run(parts: [builder()])
+}
+
+private func run(parts: [Part]) {
+    
+}
