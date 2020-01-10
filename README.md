@@ -49,8 +49,9 @@ final class SpekTests: XCTestCase {
 - Support common BDD parts: Describe, Context, BeforeAll, AfterAll, BeforeEach, AfterEach, It
 - To disable a part, prefix it with `X`, for example `XDescribe`, `XIt`, ...
 - All blocks are throwing function, so are encouraged to `do try catch`
-- BeforeAll and AfterAll are run before and after all enclosing `Describe` and `It`
-- BeforeEach and AfterEach are run before and after all enclosing `It`
+- `BeforeAll` and `AfterAll` are run before and after all enclosing `Describe` and `It`
+- `BeforeEach` and `AfterEach` are run before and after all enclosing `It`
+- `Context` behaves the same as `Describe`
 
 ## Install
 
