@@ -24,7 +24,7 @@ public struct BeforeAll: Part {
     }
 
     public func run() throws {
-
+        closure()
     }
 }
 
@@ -36,7 +36,7 @@ public struct AfterAll: Part {
     }
 
     public func run() throws {
-
+        closure()
     }
 }
 
@@ -48,7 +48,7 @@ public struct BeforeEach: Part {
     }
 
     public func run() throws {
-
+        closure()
     }
 }
 
@@ -60,7 +60,7 @@ public struct AfterEach: Part {
     }
 
     public func run() throws {
-
+        closure()
     }
 }
 
@@ -68,18 +68,32 @@ public struct Describe: Part {
     let name: String
     let parts: [Part]
 
-    public init(name: String, @PartBuilder builder: () -> [Part]) {
+    public init(_ name: String, @PartBuilder builder: () -> [Part]) {
         self.name = name
         self.parts = builder()
     }
 
-    public init(name: String, @PartBuilder builder: () -> Part) {
+    public init(_ name: String, @PartBuilder builder: () -> Part) {
         self.name = name
         self.parts = [builder()]
     }
 
     public func run() throws {
+        try parts.filter({ $0 is BeforeAll }).forEach({ try $0.run() })
 
+        try parts.filter({ $0 is It }).forEach({ it in
+            try parts.filter({ $0 is BeforeEach }).forEach({ try $0.run() })
+            try it.run()
+            try parts.filter({ $0 is AfterEach }).forEach({ try $0.run() })
+        })
+
+        try parts.filter({ $0 is Describe }).forEach({ it in
+            try parts.filter({ $0 is BeforeEach }).forEach({ try $0.run() })
+            try it.run()
+            try parts.filter({ $0 is AfterEach }).forEach({ try $0.run() })
+        })
+
+        try parts.filter({ $0 is AfterAll }).forEach({ try $0.run() })
     }
 }
 
@@ -87,12 +101,12 @@ public struct It: Part {
     let name: String
     let closure: () -> Void
 
-    public init(name: String, closure: @escaping () -> Void) {
+    public init(_ name: String, closure: @escaping () -> Void) {
         self.name = name
         self.closure = closure
     }
 
     public func run() throws {
-
+        closure()
     }
 }

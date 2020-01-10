@@ -3,10 +3,27 @@ import XCTest
 
 final class SpekTests: XCTestCase {
     func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(Spek().text, "Hello, World!")
+        spec {
+            Describe("abc") {
+                Describe("def") {
+                    BeforeEach {
+
+                    }
+
+                    AfterEach {
+
+                    }
+
+                    It("should work") {
+                        XCTAssertTrue(true)
+                    }
+
+                    It("should not work") {
+                        XCTAssertTrue(false)
+                    }
+                }
+            }
+        }
     }
 
     static var allTests = [

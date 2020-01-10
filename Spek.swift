@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import XCTest
 
 public func spec(@PartBuilder builder: () -> [Part]) {
     run(parts: builder())
@@ -16,5 +17,11 @@ public func spec(@PartBuilder builder: () -> Part) {
 }
 
 private func run(parts: [Part]) {
-    
+    do {
+        try parts.forEach {
+            try $0.run()
+        }
+    } catch {
+
+    }
 }
