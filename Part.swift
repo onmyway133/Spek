@@ -85,17 +85,18 @@ public struct Describe: Part {
     public func run() throws {
         try parts.filter({ $0 is BeforeAll }).forEach({ try $0.run() })
 
-        try parts.filter({ $0 is It }).forEach({ it in
+        try parts.forEach { part in
             try parts.filter({ $0 is BeforeEach }).forEach({ try $0.run() })
-            try it.run()
-            try parts.filter({ $0 is AfterEach }).forEach({ try $0.run() })
-        })
 
-        try parts.filter({ $0 is Describe }).forEach({ it in
-            try parts.filter({ $0 is BeforeEach }).forEach({ try $0.run() })
-            try it.run()
+            switch part {
+            case is It, is Describe:
+                try part.run()
+            default:
+                break
+            }
+
             try parts.filter({ $0 is AfterEach }).forEach({ try $0.run() })
-        })
+        }
 
         try parts.filter({ $0 is AfterAll }).forEach({ try $0.run() })
     }
