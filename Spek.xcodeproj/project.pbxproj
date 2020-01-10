@@ -22,6 +22,7 @@
 
 /* Begin PBXBuildFile section */
 		D25F73BF23C7C44D003CCD9E /* Spek.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25F73BE23C7C44D003CCD9E /* Spek.swift */; };
+		D25F73C123C8520C003CCD9E /* XPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25F73C023C8520C003CCD9E /* XPart.swift */; };
 		OBJ_23 /* Part.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Part.swift */; };
 		OBJ_30 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_41 /* SpekTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* SpekTests.swift */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		D25F73BE23C7C44D003CCD9E /* Spek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spek.swift; sourceTree = "<group>"; };
+		D25F73C023C8520C003CCD9E /* XPart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPart.swift; sourceTree = "<group>"; };
 		OBJ_12 /* SpekTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpekTests.swift; sourceTree = "<group>"; };
 		OBJ_13 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
 		OBJ_17 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -103,7 +105,7 @@
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -112,7 +114,6 @@
 				OBJ_14 /* Products */,
 				OBJ_17 /* README.md */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_7 /* Sources */ = {
@@ -120,6 +121,7 @@
 			children = (
 				OBJ_9 /* Part.swift */,
 				D25F73BE23C7C44D003CCD9E /* Spek.swift */,
+				D25F73C023C8520C003CCD9E /* XPart.swift */,
 			);
 			name = Sources;
 			sourceTree = SOURCE_ROOT;
@@ -190,7 +192,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_14 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -209,6 +211,7 @@
 			buildActionMask = 0;
 			files = (
 				D25F73BF23C7C44D003CCD9E /* Spek.swift in Sources */,
+				D25F73C123C8520C003CCD9E /* XPart.swift in Sources */,
 				OBJ_23 /* Part.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

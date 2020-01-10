@@ -16,51 +16,55 @@ public protocol Part {
     func run() throws
 }
 
-public struct BeforeAll: Part {
-    let closure: () -> Void
+public extension Part {
+    func run() throws {}
+}
 
-    public init(closure: @escaping () -> Void) {
+public struct BeforeAll: Part {
+    let closure: () throws -> Void
+
+    public init(closure: @escaping () throws -> Void) {
         self.closure = closure
     }
 
     public func run() throws {
-        closure()
+        try closure()
     }
 }
 
 public struct AfterAll: Part {
-    let closure: () -> Void
+    let closure: () throws -> Void
 
-    public init(closure: @escaping () -> Void) {
+    public init(closure: @escaping () throws -> Void) {
         self.closure = closure
     }
 
     public func run() throws {
-        closure()
+        try closure()
     }
 }
 
 public struct BeforeEach: Part {
-    let closure: () -> Void
+    let closure: () throws -> Void
 
-    public init(closure: @escaping () -> Void) {
+    public init(closure: @escaping () throws -> Void) {
         self.closure = closure
     }
 
     public func run() throws {
-        closure()
+        try closure()
     }
 }
 
 public struct AfterEach: Part {
-    let closure: () -> Void
+    let closure: () throws -> Void
 
-    public init(closure: @escaping () -> Void) {
+    public init(closure: @escaping () throws -> Void) {
         self.closure = closure
     }
 
     public func run() throws {
-        closure()
+        try closure()
     }
 }
 
@@ -99,14 +103,16 @@ public struct Describe: Part {
 
 public struct It: Part {
     let name: String
-    let closure: () -> Void
+    let closure: () throws -> Void
 
-    public init(_ name: String, closure: @escaping () -> Void) {
+    public init(_ name: String, closure: @escaping () throws -> Void) {
         self.name = name
         self.closure = closure
     }
 
     public func run() throws {
-        closure()
+        try closure()
     }
 }
+
+public typealias Context = Describe

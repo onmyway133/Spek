@@ -22,6 +22,6 @@ private func run(parts: [Part]) {
             try $0.run()
         }
     } catch {
-
+        XCTFail(error.localizedDescription)
     }
 }
