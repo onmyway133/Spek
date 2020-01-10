@@ -34,7 +34,7 @@ final class SpekTests: XCTestCase {
                         XCTAssertEqual(left + right, 5)
                     }
 
-                    It("multiple correctly") {
+                    It("multiplies correctly") {
                         XCTAssertEqual(left * right, 6)
                     }
                 }
