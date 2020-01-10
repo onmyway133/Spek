@@ -3,23 +3,29 @@ import XCTest
 
 final class SpekTests: XCTestCase {
     func testExample() {
+        var left = 1
+        var right = 1
         spec {
-            Describe("abc") {
-                Describe("def") {
-                    BeforeEach {
+            Describe("math") {
+                BeforeEach {
+                    left = 2
+                }
 
+                Describe("basic") {
+                    BeforeEach {
+                        right = 3
                     }
 
                     AfterEach {
 
                     }
 
-                    It("should work") {
-                        XCTAssertTrue(true)
+                    It("adds correctly") {
+                        XCTAssertEqual(left + right, 5)
                     }
 
-                    It("should not work") {
-                        XCTAssertTrue(false)
+                    It("multiple correctly") {
+                        XCTAssertEqual(left * right, 6)
                     }
                 }
             }
