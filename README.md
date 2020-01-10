@@ -57,6 +57,7 @@ final class SpekTests: XCTestCase {
 
 Spek is distributed using the Swift Package Manager. To install it into a project, add it as a dependency within your Package.swift manifest:
 
+```swift
 let package = Package(
     ...
     dependencies: [
@@ -64,6 +65,7 @@ let package = Package(
     ],
     ...
 )
+```
 
 Then import Spek in your XCTest
 
