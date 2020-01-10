@@ -2,7 +2,7 @@
 
 ![](Screenshots/logo.png)
 
-Spek is a lightweight functional builder style Behavior Driven Development framework, designd to be used with XCTest
+Spek is a lightweight function builder style Behavior Driven Development framework, designd to be used with XCTest
 
 ## Usage
 
