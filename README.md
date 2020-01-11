@@ -93,6 +93,27 @@ Describe("math") {
 }
 ```
 
+### Generate XCTestCase (experiment)
+
+Subclass `SpekTestCase` and override `makeDescribe` method, Spek will convert your `Describe` descriptions and generate `XCTestCase` methods.
+
+For example the below test will generate `testMath_shouldWork` method
+
+```swift
+import XCTest
+import Spek
+
+class GenerateTestCaseTests: SpekTestCase {
+    override func makeDescribe() -> Describe {
+        Describe("math") {
+            It("should work") {
+                XCTAssertTrue(1 + 1 == 2)
+            }
+        }
+    }
+}
+```
+
 ## Install
 
 Spek is distributed using the Swift Package Manager. To install it into a project, add it as a dependency within your Package.swift manifest:

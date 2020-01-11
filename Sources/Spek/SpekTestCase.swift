@@ -23,7 +23,9 @@ open class SpekTestCase: SpekHelperTestCase {
     #if canImport(SpekHelper)
 
     override class func spek_testMethodSelectors() -> [SpekSelector] {
-        return []
+        return [
+            SpekSelector(selector: Selector("testABC"))
+        ]
     }
 
     private static func addInstanceMethod() -> Selector {
