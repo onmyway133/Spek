@@ -38,6 +38,7 @@
 		D25F741A23CA7C00003CCD9E /* TestAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D25F741C23CA7C00003CCD9E /* TestAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppTests.swift; sourceTree = "<group>"; };
 		D25F741E23CA7C00003CCD9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D25F742B23CA7D0D003CCD9E /* Spek */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Spek; path = ../..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +62,7 @@
 		D25F73E823CA7BD5003CCD9E = {
 			isa = PBXGroup;
 			children = (
+				D25F742B23CA7D0D003CCD9E /* Spek */,
 				D25F73F323CA7BD5003CCD9E /* TestApp */,
 				D25F741B23CA7C00003CCD9E /* TestAppTests */,
 				D25F73F223CA7BD5003CCD9E /* Products */,
@@ -146,9 +148,12 @@
 			buildRules = (
 			);
 			dependencies = (
+				D25F742D23CA7D28003CCD9E /* PBXTargetDependency */,
 				D25F742023CA7C00003CCD9E /* PBXTargetDependency */,
 			);
 			name = TestAppTests;
+			packageProductDependencies = (
+			);
 			productName = TestAppTests;
 			productReference = D25F741A23CA7C00003CCD9E /* TestAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -237,6 +242,10 @@
 			isa = PBXTargetDependency;
 			target = D25F73F023CA7BD5003CCD9E /* TestApp */;
 			targetProxy = D25F741F23CA7C00003CCD9E /* PBXContainerItemProxy */;
+		};
+		D25F742D23CA7D28003CCD9E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = D25F742C23CA7D28003CCD9E /* Spek */;
 		};
 /* End PBXTargetDependency section */
 
@@ -477,6 +486,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D25F742C23CA7D28003CCD9E /* Spek */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Spek;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D25F73E923CA7BD5003CCD9E /* Project object */;
 }

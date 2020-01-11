@@ -1,0 +1,4 @@
+module SpekHelper {
+    umbrella "/Users/khoa/XcodeProject2/Spek/Sources/SpekHelper/include"
+    export *
+}
