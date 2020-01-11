@@ -57,7 +57,7 @@ final class SpekTests: XCTestCase {
 
 ### Disable a block
 
-When you have an imcomplete block, instead of commenting it out,you can prefix it with `X` so it won't be executed
+When you have an imcomplete block, instead of commenting it out, you can prefix it with `X` so it won't be executed
 
 ```swift
 Describe("math") {
@@ -73,7 +73,7 @@ Describe("math") {
 
 ### Declare local variables
 
-Spek uses Swift 5.1 function builder so you can only declare block and nested block. To declare local variables in a subspec, you need to use `Sub` and returns `Describe` explicitly
+Spek uses Swift 5.1 function builder so you can only declare block and nested block. To declare local variables in a subspec, you need to use `Sub` and return `Describe` explicitly
 
 ```swift
 Describe("math") {
