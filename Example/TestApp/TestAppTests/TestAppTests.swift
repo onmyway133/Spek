@@ -16,6 +16,10 @@ class TestAppTests: XCTestCase {
                 It("should add correctly") {
                     XCTAssertTrue(1 + 1 == 2)
                 }
+
+                It("should fail") {
+                    XCTFail()
+                }
             }
         }
     }

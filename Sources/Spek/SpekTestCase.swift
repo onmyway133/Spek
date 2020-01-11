@@ -5,6 +5,8 @@
 //  Created by khoa on 11/01/2020.
 //
 
+/*
+
 #if canImport(XCTest)
 
 import XCTest
@@ -23,6 +25,7 @@ open class SpekTestCase: SpekHelperTestCase {
     #if canImport(SpekHelper)
 
     override class func spek_testMethodSelectors() -> [SpekSelector] {
+        let _ = addInstanceMethod()
         return [
             SpekSelector(selector: Selector("testABC"))
         ]
@@ -45,4 +48,4 @@ open class SpekTestCase: SpekHelperTestCase {
 
 #endif
 
-
+*/

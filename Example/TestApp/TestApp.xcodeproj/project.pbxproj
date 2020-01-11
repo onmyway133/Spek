@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,7 @@
 		D25F73FE23CA7BD8003CCD9E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D25F73FD23CA7BD8003CCD9E /* Preview Assets.xcassets */; };
 		D25F740123CA7BD8003CCD9E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D25F73FF23CA7BD8003CCD9E /* LaunchScreen.storyboard */; };
 		D25F741D23CA7C00003CCD9E /* TestAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25F741C23CA7C00003CCD9E /* TestAppTests.swift */; };
+		D25F743D23CA8131003CCD9E /* Spek in Frameworks */ = {isa = PBXBuildFile; productRef = D25F743C23CA8131003CCD9E /* Spek */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +39,7 @@
 		D25F741A23CA7C00003CCD9E /* TestAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D25F741C23CA7C00003CCD9E /* TestAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppTests.swift; sourceTree = "<group>"; };
 		D25F741E23CA7C00003CCD9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D25F742B23CA7D0D003CCD9E /* Spek */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Spek; path = ../..; sourceTree = "<group>"; };
+		D25F743923CA811D003CCD9E /* Spek */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Spek; path = ../..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D25F743D23CA8131003CCD9E /* Spek in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,7 +64,7 @@
 		D25F73E823CA7BD5003CCD9E = {
 			isa = PBXGroup;
 			children = (
-				D25F742B23CA7D0D003CCD9E /* Spek */,
+				D25F743923CA811D003CCD9E /* Spek */,
 				D25F73F323CA7BD5003CCD9E /* TestApp */,
 				D25F741B23CA7C00003CCD9E /* TestAppTests */,
 				D25F73F223CA7BD5003CCD9E /* Products */,
@@ -148,11 +150,12 @@
 			buildRules = (
 			);
 			dependencies = (
-				D25F742D23CA7D28003CCD9E /* PBXTargetDependency */,
+				D25F743B23CA812C003CCD9E /* PBXTargetDependency */,
 				D25F742023CA7C00003CCD9E /* PBXTargetDependency */,
 			);
 			name = TestAppTests;
 			packageProductDependencies = (
+				D25F743C23CA8131003CCD9E /* Spek */,
 			);
 			productName = TestAppTests;
 			productReference = D25F741A23CA7C00003CCD9E /* TestAppTests.xctest */;
@@ -243,9 +246,9 @@
 			target = D25F73F023CA7BD5003CCD9E /* TestApp */;
 			targetProxy = D25F741F23CA7C00003CCD9E /* PBXContainerItemProxy */;
 		};
-		D25F742D23CA7D28003CCD9E /* PBXTargetDependency */ = {
+		D25F743B23CA812C003CCD9E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			productRef = D25F742C23CA7D28003CCD9E /* Spek */;
+			productRef = D25F743A23CA812C003CCD9E /* Spek */;
 		};
 /* End PBXTargetDependency section */
 
@@ -488,7 +491,11 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D25F742C23CA7D28003CCD9E /* Spek */ = {
+		D25F743A23CA812C003CCD9E /* Spek */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Spek;
+		};
+		D25F743C23CA8131003CCD9E /* Spek */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Spek;
 		};

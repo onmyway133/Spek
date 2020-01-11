@@ -15,20 +15,29 @@ let package = Package(
     dependencies: [],
     targets: {
         var mutableTargets: [Target] = []
+        /*
         #if os(macOS)
             mutableTargets.append(contentsOf: [
                 .target(name: "SpekHelper", dependencies: []),
-                .target(name: "Spek", dependencies: ["SpekHelper"])
+                .target(name: "Spek", dependencies: ["SpekHelper"], exclude: [
+                    "Sources/Spek/SpekTestCase"
+                ])
             ])
         #else
             mutableTargets.append(
-                .target(name: "Spek", dependencies: [])
+                .target(name: "Spek", dependencies: [], exclude: [
+                    "Sources/Spek/SpekTestCase"
+                ])
             )
         #endif
+        */
 
-        mutableTargets.append(
+        mutableTargets.append(contentsOf: [
+            .target(name: "Spek", dependencies: [], exclude: [
+                "Sources/Spek/SpekTestCase"
+            ]),
             .testTarget(name: "SpekTests", dependencies: ["Spek"])
-        )
+        ])
 
         return mutableTargets
     }(),

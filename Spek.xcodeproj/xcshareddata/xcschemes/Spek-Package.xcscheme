@@ -10,14 +10,6 @@
           ReferencedContainer = "container:Spek.xcodeproj">
         </BuildableReference>
       </BuildActionEntry>
-      <BuildActionEntry buildForTesting = "YES" buildForRunning = "YES" buildForProfiling = "YES" buildForArchiving = "YES" buildForAnalyzing = "YES">
-        <BuildableReference
-          BuildableIdentifier = "primary"
-          BuildableName = "'lib$(TARGET_NAME)'"
-          BlueprintName = "SpekHelper"
-          ReferencedContainer = "container:Spek.xcodeproj">
-        </BuildableReference>
-      </BuildActionEntry>
     </BuildActionEntries>
   </BuildAction>
   <TestAction
