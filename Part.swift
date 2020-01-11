@@ -89,7 +89,7 @@ public struct Describe: Part {
             try parts.filter({ $0 is BeforeEach }).forEach({ try $0.run() })
 
             switch part {
-            case is It, is Describe:
+            case is It, is Describe, is Sub:
                 try part.run()
             default:
                 break
@@ -113,6 +113,17 @@ public struct It: Part {
 
     public func run() throws {
         try closure()
+    }
+}
+
+public struct Sub: Part {
+    let closure: () -> Describe
+    public init(closure: @escaping () -> Describe) {
+        self.closure = closure
+    }
+
+    public func run() throws {
+        try closure().run()
     }
 }
 

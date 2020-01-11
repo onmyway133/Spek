@@ -64,4 +64,11 @@ public struct XIt: Part {
     }
 }
 
+public struct XSub: Part {
+    let closure: () -> Describe
+    public init(closure: @escaping () -> Describe) {
+        self.closure = closure
+    }
+}
+
 public typealias XContext = XDescribe

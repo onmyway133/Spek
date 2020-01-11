@@ -3,8 +3,8 @@ import XCTest
 
 final class SpekTests: XCTestCase {
     func testExample() {
-        var left = 1
-        var right = 1
+        var left = 0
+        var right = 0
         spec {
             Describe("math") {
                 BeforeEach {
@@ -18,6 +18,15 @@ final class SpekTests: XCTestCase {
 
                     AfterEach {
 
+                    }
+
+                    Sub {
+                        let another = 4
+                        return Describe("3 operands") {
+                            It("adds with another") {
+                                XCTAssertEqual(left + right + another, 9)
+                            }
+                        }
                     }
 
                     It("adds correctly") {

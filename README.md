@@ -53,6 +53,46 @@ final class SpekTests: XCTestCase {
 - `BeforeEach` and `AfterEach` are run before and after all enclosing `It`
 - `Context` behaves the same as `Describe`
 
+## How to
+
+### Disable a block
+
+When you have an imcomplete block, instead of commenting it out,you can prefix it with `X` so it won't be executed
+
+```swift
+Describe("math") {
+    It("will be run") {
+
+    }
+
+    XIt("won't be run") {
+
+    }
+}
+```
+
+### Declare local variables
+
+Spek uses Swift 5.1 function builder so you can only declare block and nested block. To declare local variables in a subspec, you need to use `Sub` and returns `Describe` explicitly
+
+```swift
+Describe("math") {
+    Describe("advanced") {
+
+    }
+
+    Sub {
+        let abc = 1
+        let def = 2
+        return Describe("extra") {
+            It("should add") {
+                XCTAssertEqual(abc + def, 2)
+            }
+        }
+    }
+}
+```
+
 ## Install
 
 Spek is distributed using the Swift Package Manager. To install it into a project, add it as a dependency within your Package.swift manifest:
