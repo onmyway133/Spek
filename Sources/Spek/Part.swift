@@ -72,14 +72,17 @@ public struct Describe: Part {
     let name: String
     let parts: [Part]
 
-    public init(_ name: String, @PartBuilder builder: () -> [Part]) {
+    public init(_ name: String, parts: [Part] = []) {
         self.name = name
-        self.parts = builder()
+        self.parts = parts
+    }
+
+    public init(_ name: String, @PartBuilder builder: () -> [Part]) {
+        self.init(name, parts: builder())
     }
 
     public init(_ name: String, @PartBuilder builder: () -> Part) {
-        self.name = name
-        self.parts = [builder()]
+        self.init(name, parts: [builder()])
     }
 
     public func run() throws {
