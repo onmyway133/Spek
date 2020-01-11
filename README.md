@@ -115,6 +115,10 @@ Then import Spek in your XCTest
 
 Khoa Pham, onmyway133@gmail.com
 
+## Credit
+
+- [Quick](https://github.com/Quick/Quick) for testInvocations reference
+
 ## License
 
 **Spek** is available under the MIT license. See the [LICENSE](https://github.com/onmyway133/Spek/blob/master/LICENSE.md) file for more info.

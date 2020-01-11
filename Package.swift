@@ -13,14 +13,24 @@ let package = Package(
         ),
     ],
     dependencies: [],
-    targets: [
-        .target(
-            name: "Spek",
-            dependencies: []
-        ),
-        .testTarget(
-            name: "SpekTests",
-            dependencies: ["Spek"]
-        ),
-    ]
+    targets: {
+        var mutableTargets: [Target] = []
+        #if os(macOS)
+            mutableTargets.append(contentsOf: [
+                .target(name: "SpekHelper", dependencies: []),
+                .target(name: "Spek", dependencies: ["SpekHelper"])
+            ])
+        #else
+            mutableTargets.append(
+                .target(name: "Spek", dependencies: [])
+            )
+        #endif
+
+        mutableTargets.append(
+            .testTarget(name: "SpekTests", dependencies: ["Spek"])
+        )
+
+        return mutableTargets
+    }(),
+    swiftLanguageVersions: [.v5]
 )
