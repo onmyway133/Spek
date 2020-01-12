@@ -132,7 +132,7 @@ Spek is distributed using the Swift Package Manager. To install it into a projec
 let package = Package(
     ...
     dependencies: [
-        .package(url: "https://github.com/onmyway133/Spek.git", from: "0.2.2")
+        .package(url: "https://github.com/onmyway133/Spek.git", from: "0.3.0")
     ],
     ...
 )
