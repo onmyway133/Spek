@@ -5,8 +5,6 @@
 //  Created by khoa on 11/01/2020.
 //
 
-/*
-
 #if canImport(XCTest)
 
 import XCTest
@@ -24,16 +22,16 @@ open class SpekTestCase: SpekHelperTestCase {
 
     #if canImport(SpekHelper)
 
-    override class func spek_testMethodSelectors() -> [SpekSelector] {
+    override open class func spekTestMethodSelectors() -> [String] {
         let _ = addInstanceMethod()
         return [
-            SpekSelector(selector: Selector("testABC"))
+            "testABC"
         ]
     }
 
     private static func addInstanceMethod() -> Selector {
-        let block: @convention(block) (SpekTestCase) -> Void = { spec in
-           print("hello")
+        let block: @convention(block) (SpekTestCase) -> Void = { spekTestCase in
+           print(spekTestCase)
         }
 
         let implementation = imp_implementationWithBlock(block as Any)
@@ -47,5 +45,3 @@ open class SpekTestCase: SpekHelperTestCase {
 }
 
 #endif
-
-*/

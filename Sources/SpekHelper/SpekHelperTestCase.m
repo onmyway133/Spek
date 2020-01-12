@@ -5,32 +5,21 @@
 //  Created by khoa on 11/01/2020.
 //
 
-#if _XCTEST_
-
-#import "SpekHelperTestCase.h"
-
-@interface SpekSelector ()
-@property(nonatomic, assign) SEL selector;
-@end
-
-@implementation SpekSelector
-
-- (instancetype)initWithSelector:(SEL)selector {
-    self = [super init];
-    _selector = selector;
-    return self;
-}
-
-@end
+#import "include/SpekHelperTestCase.h"
 
 @implementation SpekHelperTestCase
 
-+ (NSArray<NSInvocation *> *)testInvocations {
-    NSArray<SpekSelector *> *selectors = [self spek_testMethodSelectors];
-    NSMutableArray<NSInvocation *> *invocations = [NSMutableArray arrayWithCapacity:selectors.count];
+- (instancetype)init {
+    self = [super initWithInvocation: nil];
+    return self;
+}
 
-    for (SpekSelector *aSelector in selectors) {
-        SEL selector = aSelector.selector;
++ (NSArray<NSInvocation *> *)testInvocations {
+    NSArray<NSString *> *selectorStrings = [self spekTestMethodSelectors];
+    NSMutableArray<NSInvocation *> *invocations = [NSMutableArray arrayWithCapacity:selectorStrings.count];
+
+    for (NSString *selectorString in selectorStrings) {
+        SEL selector = NSSelectorFromString(selectorString);
         NSMethodSignature *signature = [self instanceMethodSignatureForSelector:selector];
         NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
         invocation.selector = selector;
@@ -41,10 +30,8 @@
     return invocations;
 }
 
-+ (NSArray<SpekSelector *> *)spek_testMethodSelectors {
++ (NSArray<NSString *> *)spekTestMethodSelectors {
     return @[];
 }
 
 @end
-
-#endif

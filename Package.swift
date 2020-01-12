@@ -5,8 +5,10 @@ import PackageDescription
 
 let package = Package(
     name: "Spek",
+    platforms: [
+        .macOS(.v10_10), .iOS(.v8), .tvOS(.v9)
+    ],
     products: [
-        // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
             name: "Spek",
             targets: ["Spek"]
@@ -14,30 +16,20 @@ let package = Package(
     ],
     dependencies: [],
     targets: {
-        var mutableTargets: [Target] = []
-        /*
-        #if os(macOS)
+        var mutableTargets: [Target] = [
+            .testTarget(name: "SpekTests", dependencies: ["Spek"])
+        ]
+
+        #if os(macOS) && canImport(ObjectiveC)
             mutableTargets.append(contentsOf: [
                 .target(name: "SpekHelper", dependencies: []),
-                .target(name: "Spek", dependencies: ["SpekHelper"], exclude: [
-                    "Sources/Spek/SpekTestCase"
-                ])
+                .target(name: "Spek", dependencies: ["SpekHelper"])
             ])
         #else
             mutableTargets.append(
-                .target(name: "Spek", dependencies: [], exclude: [
-                    "Sources/Spek/SpekTestCase"
-                ])
+                .target(name: "Spek", dependencies: [])
             )
         #endif
-        */
-
-        mutableTargets.append(contentsOf: [
-            .target(name: "Spek", dependencies: [], exclude: [
-                "Sources/Spek/SpekTestCase"
-            ]),
-            .testTarget(name: "SpekTests", dependencies: ["Spek"])
-        ])
 
         return mutableTargets
     }(),
