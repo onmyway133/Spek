@@ -25,12 +25,34 @@ open class SpekTestCase: SpekHelperTestCase {
     override public class func spekGenerateTestMethodNames() -> [String] {
         let describe = Self.makeDescribe()
 
-        var names: [String] = []
-        generate(describe: describe, names: &names)
-        return names
+        var methods: [Method] = []
+        generate(
+            describe: describe,
+            accumulation: Accumulation(),
+            methods: &methods
+        )
+
+        methods.forEach { method in
+            addInstanceMethod(name: method.name, closure: method.closure)
+        }
+
+        return methods.map({ $0.name })
     }
 
-    private static func addInstanceMethod(name: String, closure: @escaping () -> Void) -> String {
+    // MARK: -  Private
+
+    private struct Method {
+        let name: String
+        let closure: () -> Void
+    }
+
+    private struct Accumulation {
+        var before: () throws -> Void = {}
+        var after: () throws -> Void = {}
+        var prefix: [String] = []
+    }
+
+    private static func addInstanceMethod(name: String, closure: @escaping () -> Void) {
         let block: @convention(block) (SpekTestCase) -> Void = { spekTestCase in
             let _ = spekTestCase
             closure()
@@ -39,51 +61,85 @@ open class SpekTestCase: SpekHelperTestCase {
         let implementation = imp_implementationWithBlock(block as Any)
         let selector = NSSelectorFromString(name)
         class_addMethod(self, selector, implementation, "v@:")
-
-        return name
     }
 
-    private static func generate(describe: Describe, prefixes: [String] = [], names: inout [String]) {
+    private static func generate(
+        describe: Describe,
+        accumulation: Accumulation,
+        methods: inout [Method]
+    ) {
         for part in describe.parts {
             switch part {
             case let it as It:
                 let closure = {
                     do {
-                        let parts = describe.parts
-                        try parts.filter({ $0 is BeforeAll }).forEach({ try $0.run() })
-                        try parts.filter({ $0 is BeforeEach }).forEach({ try $0.run() })
-
+                        try accumulation.before()
+                        try describe.runBefore()
                         try it.run()
-
-                        try parts.filter({ $0 is AfterEach }).forEach({ try $0.run() })
-                        try parts.filter({ $0 is AfterAll }).forEach({ try $0.run() })
+                        try describe.runAfter()
+                        try accumulation.after()
                     } catch {
                         XCTFail(error.localizedDescription)
                     }
                 }
 
-                names.append(
-                    addInstanceMethod(
-                        name: makeName(prefixes: prefixes, describeName: describe.name, itName: it.name),
+                methods.append(
+                    Method(
+                        name: makeName(
+                            prefix: accumulation.prefix,
+                            describeName: describe.name,
+                            itName: it.name
+                        ),
                         closure: closure
                     )
                 )
             case let nestedDescribe as Describe:
-                generate(describe: nestedDescribe, prefixes: prefixes + [describe.name], names: &names)
+                generate(
+                    describe: describe,
+                    nestedDescribe: nestedDescribe,
+                    methods: &methods
+                )
             case let sub as Sub:
-                generate(describe: sub.closure(), prefixes: prefixes + [describe.name], names: &names)
+                let nestedDescribe = sub.closure()
+                generate(
+                    describe: describe,
+                    nestedDescribe: nestedDescribe,
+                    methods: &methods
+                )
             default:
                 break
             }
         }
     }
 
-    private static func makeName(prefixes: [String], describeName: String, itName: String) -> String {
+    private static func generate(
+        describe: Describe,
+        nestedDescribe: Describe,
+        methods: inout [Method]
+    ) {
+        var accumulation = Accumulation()
+        accumulation.prefix = accumulation.prefix + [describe.name]
+        accumulation.before = {
+            try describe.runBefore()
+        }
+
+        accumulation.after = {
+            try describe.runAfter()
+        }
+
+        generate(
+            describe: nestedDescribe,
+            accumulation: accumulation,
+            methods: &methods
+        )
+    }
+
+    private static func makeName(prefix: [String], describeName: String, itName: String) -> String {
         var strings: [String] = [
             "test"
         ]
 
-        strings.append(contentsOf: prefixes)
+        strings.append(contentsOf: prefix)
         strings.append(contentsOf: [
             describeName,
             itName
@@ -105,3 +161,15 @@ open class SpekTestCase: SpekHelperTestCase {
 }
 
 #endif
+
+private extension Describe {
+    func runBefore() throws {
+        try parts.filter({ $0 is BeforeAll }).forEach({ try $0.run() })
+        try parts.filter({ $0 is BeforeEach }).forEach({ try $0.run() })
+    }
+
+    func runAfter() throws {
+        try parts.filter({ $0 is AfterEach }).forEach({ try $0.run() })
+        try parts.filter({ $0 is AfterAll }).forEach({ try $0.run() })
+    }
+}
