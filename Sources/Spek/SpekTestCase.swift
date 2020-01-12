@@ -94,44 +94,44 @@ open class SpekTestCase: SpekHelperTestCase {
                     )
                 )
             case let nestedDescribe as Describe:
-                generate(
+                let accumulation = update(
+                    accumulation: accumulation,
                     describe: describe,
-                    nestedDescribe: nestedDescribe,
-                    methods: &methods
+                    nestedDescribe: nestedDescribe
                 )
+                generate(describe: nestedDescribe, accumulation: accumulation, methods: &methods)
             case let sub as Sub:
                 let nestedDescribe = sub.closure()
-                generate(
+                let accumulation = update(
+                    accumulation: accumulation,
                     describe: describe,
-                    nestedDescribe: nestedDescribe,
-                    methods: &methods
+                    nestedDescribe: nestedDescribe
                 )
+                generate(describe: nestedDescribe, accumulation: accumulation, methods: &methods)
             default:
                 break
             }
         }
     }
 
-    private static func generate(
+    private static func update(
+        accumulation: Accumulation,
         describe: Describe,
-        nestedDescribe: Describe,
-        methods: inout [Method]
-    ) {
-        var accumulation = Accumulation()
-        accumulation.prefix = accumulation.prefix + [describe.name]
-        accumulation.before = {
+        nestedDescribe: Describe
+    ) -> Accumulation {
+        var updatedAccumulation = accumulation
+        updatedAccumulation.before = {
+            try accumulation.before()
             try describe.runBefore()
         }
 
-        accumulation.after = {
+        updatedAccumulation.after = {
             try describe.runAfter()
+            try accumulation.after()
         }
 
-        generate(
-            describe: nestedDescribe,
-            accumulation: accumulation,
-            methods: &methods
-        )
+        updatedAccumulation.prefix = accumulation.prefix + [describe.name]
+        return updatedAccumulation
     }
 
     private static func makeName(prefix: [String], describeName: String, itName: String) -> String {
