@@ -43,7 +43,7 @@ open class SpekTestCase: SpekHelperTestCase {
         return name
     }
 
-    private static func generate(describe: Describe, prefix: String = "", names: inout [String]) {
+    private static func generate(describe: Describe, prefixes: [String] = [], names: inout [String]) {
         for part in describe.parts {
             switch part {
             case let it as It:
@@ -64,18 +64,32 @@ open class SpekTestCase: SpekHelperTestCase {
 
                 names.append(
                     addInstanceMethod(
-                        name: normalize(["test", prefix, describe.name, it.name]),
+                        name: makeName(prefixes: prefixes, describeName: describe.name, itName: it.name),
                         closure: closure
                     )
                 )
-            case let subDescribe as Describe:
-                generate(describe: subDescribe, prefix: describe.name, names: &names)
+            case let nestedDescribe as Describe:
+                generate(describe: nestedDescribe, prefixes: prefixes + [describe.name], names: &names)
             case let sub as Sub:
-                generate(describe: sub.closure(), prefix: describe.name, names: &names)
+                generate(describe: sub.closure(), prefixes: prefixes + [describe.name], names: &names)
             default:
                 break
             }
         }
+    }
+
+    private static func makeName(prefixes: [String], describeName: String, itName: String) -> String {
+        var strings: [String] = [
+            "test"
+        ]
+
+        strings.append(contentsOf: prefixes)
+        strings.append(contentsOf: [
+            describeName,
+            itName
+        ])
+
+        return normalize(strings)
     }
 
     private static func normalize(_ strings: [String]) -> String {

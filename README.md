@@ -95,11 +95,13 @@ Describe("math") {
 }
 ```
 
-### Generate XCTestCase (experiment)
+### Generate XCTestCase
 
-Subclass `SpekTestCase` and override `makeDescribe` method, Spek will convert your `Describe` descriptions and generate `XCTestCase` methods.
+By default, `spec` method runs the test directly, to generate test cases, you need to override `makeDescribe`.
 
-For example the below test will generate `test_math_should_work` method
+Subclass `SpekTestCase` and override `makeDescribe` method, Spek will convert your `Describe` descriptions and generate `XCTestCase` methods. It generates test methods for nested `Describe` and `Sub` too.
+
+For example the below test will generate `test_math_should_work` and `test_math_advanced_should_calculate` methods
 
 ```swift
 import XCTest
@@ -110,6 +112,12 @@ class GenerateTestCaseTests: SpekTestCase {
         Describe("math") {
             It("should work") {
                 XCTAssertTrue(1 + 1 == 2)
+            }
+
+            Describe("advanced") {
+                It("should calculate") {
+                    XCTAssertEqual(2 * 5, 10)
+                }
             }
         }
     }
