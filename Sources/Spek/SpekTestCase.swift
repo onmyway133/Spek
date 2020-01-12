@@ -68,15 +68,19 @@ open class SpekTestCase: SpekHelperTestCase {
         accumulation: Accumulation,
         methods: inout [Method]
     ) {
+
+        let accumulation = update(
+            accumulation: accumulation,
+            describe: describe
+        )
+
         for part in describe.parts {
             switch part {
             case let it as It:
                 let closure = {
                     do {
                         try accumulation.before()
-                        try describe.runBefore()
                         try it.run()
-                        try describe.runAfter()
                         try accumulation.after()
                     } catch {
                         XCTFail(error.localizedDescription)
@@ -87,26 +91,15 @@ open class SpekTestCase: SpekHelperTestCase {
                     Method(
                         name: makeName(
                             prefix: accumulation.prefix,
-                            describeName: describe.name,
                             itName: it.name
                         ),
                         closure: closure
                     )
                 )
             case let nestedDescribe as Describe:
-                let accumulation = update(
-                    accumulation: accumulation,
-                    describe: describe,
-                    nestedDescribe: nestedDescribe
-                )
                 generate(describe: nestedDescribe, accumulation: accumulation, methods: &methods)
             case let sub as Sub:
                 let nestedDescribe = sub.closure()
-                let accumulation = update(
-                    accumulation: accumulation,
-                    describe: describe,
-                    nestedDescribe: nestedDescribe
-                )
                 generate(describe: nestedDescribe, accumulation: accumulation, methods: &methods)
             default:
                 break
@@ -116,8 +109,7 @@ open class SpekTestCase: SpekHelperTestCase {
 
     private static func update(
         accumulation: Accumulation,
-        describe: Describe,
-        nestedDescribe: Describe
+        describe: Describe
     ) -> Accumulation {
         var updatedAccumulation = accumulation
         updatedAccumulation.before = {
@@ -134,14 +126,13 @@ open class SpekTestCase: SpekHelperTestCase {
         return updatedAccumulation
     }
 
-    private static func makeName(prefix: [String], describeName: String, itName: String) -> String {
+    private static func makeName(prefix: [String], itName: String) -> String {
         var strings: [String] = [
             "test"
         ]
 
         strings.append(contentsOf: prefix)
         strings.append(contentsOf: [
-            describeName,
             itName
         ])
 
