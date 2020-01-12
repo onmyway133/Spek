@@ -97,6 +97,8 @@ Describe("math") {
 
 Subclass `SpekTestCase` and override `makeDescribe` method, Spek will convert your `Describe` descriptions and generate `XCTestCase` methods.
 
+You need to link with `XCTest` framework in your test target.
+
 For example the below test will generate `testMath_shouldWork` method
 
 ```swift

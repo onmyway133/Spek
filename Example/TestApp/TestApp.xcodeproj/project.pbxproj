@@ -15,6 +15,7 @@
 		D25F740123CA7BD8003CCD9E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D25F73FF23CA7BD8003CCD9E /* LaunchScreen.storyboard */; };
 		D25F741D23CA7C00003CCD9E /* TestAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25F741C23CA7C00003CCD9E /* TestAppTests.swift */; };
 		D25F743D23CA8131003CCD9E /* Spek in Frameworks */ = {isa = PBXBuildFile; productRef = D25F743C23CA8131003CCD9E /* Spek */; };
+		D2AF6C1723CAF8F20010CD87 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AF6C1623CAF8F20010CD87 /* XCTest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		D25F741C23CA7C00003CCD9E /* TestAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppTests.swift; sourceTree = "<group>"; };
 		D25F741E23CA7C00003CCD9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D25F743923CA811D003CCD9E /* Spek */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Spek; path = ../..; sourceTree = "<group>"; };
+		D2AF6C1623CAF8F20010CD87 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2AF6C1723CAF8F20010CD87 /* XCTest.framework in Frameworks */,
 				D25F743D23CA8131003CCD9E /* Spek in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -115,6 +118,7 @@
 		D25F742623CA7C13003CCD9E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D2AF6C1623CAF8F20010CD87 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
