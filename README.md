@@ -6,6 +6,8 @@ Spek is a lightweight function builder style Behavior Driven Development framewo
 
 ## Usage
 
+⚠️Before using any test frameworks, you need to ensure there is `XCTest` framework in your test target.
+
 ```swift
 import XCTest
 @testable import Spek
@@ -97,16 +99,14 @@ Describe("math") {
 
 Subclass `SpekTestCase` and override `makeDescribe` method, Spek will convert your `Describe` descriptions and generate `XCTestCase` methods.
 
-You need to link with `XCTest` framework in your test target.
-
-For example the below test will generate `testMath_shouldWork` method
+For example the below test will generate `test_math_should_work` method
 
 ```swift
 import XCTest
 import Spek
 
 class GenerateTestCaseTests: SpekTestCase {
-    override func makeDescribe() -> Describe {
+    override class func makeDescribe() -> Describe {
         Describe("math") {
             It("should work") {
                 XCTAssertTrue(1 + 1 == 2)

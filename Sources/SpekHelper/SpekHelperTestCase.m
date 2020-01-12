@@ -15,7 +15,7 @@
 }
 
 + (NSArray<NSInvocation *> *)testInvocations {
-    NSArray<NSString *> *selectorStrings = [self spekTestMethodSelectors];
+    NSArray<NSString *> *selectorStrings = [self spekGenerateTestMethodNames];
     NSMutableArray<NSInvocation *> *invocations = [NSMutableArray arrayWithCapacity:selectorStrings.count];
 
     for (NSString *selectorString in selectorStrings) {
@@ -30,7 +30,7 @@
     return invocations;
 }
 
-+ (NSArray<NSString *> *)spekTestMethodSelectors {
++ (NSArray<NSString *> *)spekGenerateTestMethodNames {
     return @[];
 }
 

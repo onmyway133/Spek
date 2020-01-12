@@ -9,6 +9,6 @@
 #import <XCTest/XCTest.h>
 
 @interface SpekHelperTestCase : XCTestCase
-+ (NSArray<NSString *> *)spekTestMethodSelectors;
++ (NSArray<NSString *> *)spekGenerateTestMethodNames;
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 @end
