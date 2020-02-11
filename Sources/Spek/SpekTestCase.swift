@@ -16,14 +16,14 @@ public typealias SpekHelperTestCase = XCTestCase
 #endif
 
 open class SpekTestCase: SpekHelperTestCase {
-    open class func makeDescribe() -> Describe {
+    open class func describe() -> Describe {
         return Describe("empty")
     }
 
     #if canImport(SpekHelper)
 
     override public class func spekGenerateTestMethodNames() -> [String] {
-        let describe = Self.makeDescribe()
+        let describe = Self.describe()
 
         var methods: [Method] = []
         generate(

@@ -111,7 +111,7 @@ import XCTest
 import Spek
 
 class GenerateTestCaseTests: SpekTestCase {
-    override class func makeDescribe() -> Describe {
+    override class func describe() -> Describe {
         Describe("math") {
             It("should work") {
                 XCTAssertTrue(1 + 1 == 2)
@@ -135,7 +135,7 @@ Spek is distributed using the Swift Package Manager. To install it into a projec
 let package = Package(
     ...
     dependencies: [
-        .package(url: "https://github.com/onmyway133/Spek.git", from: "0.4.0")
+        .package(url: "https://github.com/onmyway133/Spek.git", from: "0.5.0")
     ],
     ...
 )

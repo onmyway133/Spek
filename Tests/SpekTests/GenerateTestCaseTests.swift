@@ -9,7 +9,7 @@ import XCTest
 import Spek
 
 class GenerateTestCaseTests: SpekTestCase {
-    override class func makeDescribe() -> Describe {
+    override class func describe() -> Describe {
         var left = 0
         var right = 0
         return Describe("math") {
